@@ -2,33 +2,75 @@
 using System.Collections;
 public class StateManager : MonoBehaviour {
 
-	Color startcolor;
 	public string fullname;
 	int timespressed=0;
 	int currzoom;
 	float zooma;
 	int countah=0;
+	bool isSpilt;
+	Color col_now;
+	public float ID;
+	public float confidence=0.0f;
 	Bounds stateBounds;
 	void Start(){
-		startcolor=Random.ColorHSV(0f, 0f, 0f, 0f, 0.85f, 1f);
-		GetComponent<Renderer>().material.color = startcolor;
-		GetComponent<cakeslice.Outline> ().enabled = false;
-		stateBounds = GetComponent<MeshFilter>().mesh.bounds;
+		ID=Random.Range(0.0f,2000.0f);
+		isSpilt=GetComponent<cakeslice.Outline> () == null;
+		if (GetComponent<cakeslice.Outline> () != null)
+			GetComponent<cakeslice.Outline> ().enabled = false;
+		else {
+			foreach(Transform child in transform)
+			{
+				child.gameObject.GetComponent<cakeslice.Outline> ().enabled = false;
+			}
+		}
+
+
+		if (GetComponent<MeshFilter> () != null)
+			stateBounds = GetComponent<MeshFilter> ().mesh.bounds;
+		else
+			stateBounds = GetComponent<BoxCollider> ().bounds;
 		zooma = stateBounds.max.y;
 	}
 	void Update(){
-		
-		if (gameObject.transform.name == GameObject.Find ("Managers").GetComponent<GameManager>().selectedstatename) {
-			GetComponent<cakeslice.Outline>().enabled = true;
-			//if tapped again, zoom in
+
+
+		confidence=Mathf.PerlinNoise(ID/9.8567f+Time.time/100.0f, 0.0F);
+		if (confidence < .5) { 
+			col_now = Color.Lerp (Color.red, new Color(0.39f,0.35f,0.39f), confidence*2);
 		} else {
-			GetComponent<cakeslice.Outline>().enabled = false;
+			col_now = Color.Lerp (new Color(0.39f,0.35f,0.39f), Color.white, (confidence-0.5f)*2);
+		}
+
+
+		if (!isSpilt) { //A state, non disjoint union territory
+			//Highlight if selected
+			if (gameObject.transform.name == GameObject.Find ("Managers").GetComponent<GameManager> ().selectedstatename)
+				GetComponent<cakeslice.Outline> ().enabled = true;
+			else
+				GetComponent<cakeslice.Outline> ().enabled = false;
+			GetComponent<Renderer> ().material.color = col_now;
+
+
+
+
+		} else {//is a disjointed union territory
+			foreach (Transform child in transform) {
+				if (gameObject.transform.name == GameObject.Find ("Managers").GetComponent<GameManager> ().selectedstatename) {
+					child.gameObject.GetComponent<cakeslice.Outline> ().enabled = true;
+				} else {
+					child.gameObject.GetComponent<cakeslice.Outline> ().enabled = false;
+				}
+				child.gameObject.GetComponent<Renderer> ().material.color = col_now;
+
+			}
+
 		}
 
 
 
 
-		if (countah != 0) {
+		//set timer on if mousepressed once
+		if(countah != 0) {
 			countah++;
 		}
 	}
@@ -43,7 +85,7 @@ public class StateManager : MonoBehaviour {
 	}
 	void OnMouseUp(){
 		Debug.Log ("Tap ends at : " + countah);
-		if (countah <= 8) {
+		if (countah <= 15) {
 			GameObject.Find ("Managers").GetComponent<GameManager> ().selectedstatename = name;
 		}
 		countah = 0;
