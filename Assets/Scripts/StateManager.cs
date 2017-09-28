@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 using System.Collections;
-using System.Diagnostics;
 public class StateManager : MonoBehaviour {
 
 	Color startcolor;
@@ -8,7 +7,7 @@ public class StateManager : MonoBehaviour {
 	int timespressed=0;
 	int currzoom;
 	float zooma;
-	Stopwatch stopwatch;
+	int countah=0;
 	Bounds stateBounds;
 	void Start(){
 		startcolor=Random.ColorHSV(0f, 0f, 0f, 0f, 0.85f, 1f);
@@ -16,7 +15,6 @@ public class StateManager : MonoBehaviour {
 		GetComponent<cakeslice.Outline> ().enabled = false;
 		stateBounds = GetComponent<MeshFilter>().mesh.bounds;
 		zooma = stateBounds.max.y;
-		stopwatch = new Stopwatch();
 	}
 	void Update(){
 		
@@ -26,11 +24,29 @@ public class StateManager : MonoBehaviour {
 		} else {
 			GetComponent<cakeslice.Outline>().enabled = false;
 		}
-	}
 
-	void OnMouseDown(){
-		if (Input.GetTouch (0).tapCount == 1 && Input.GetTouch(0).phase == TouchPhase.Began && Input.GetTouch(0).phase != TouchPhase.Moved && Input.GetTouch(0).deltaPosition.x<10f && Input.GetTouch(0).deltaPosition.y<100f) {
-			GameObject.Find ("Managers").GetComponent<GameManager> ().selectedstatename = name;
+
+
+
+		if (countah != 0) {
+			countah++;
 		}
 	}
-}
+
+//	void OnMouseDown(){
+//		if (Input.GetTouch (0).tapCount == 1 && Input.GetTouch(0).phase == TouchPhase.Began && Input.GetTouch(0).phase != TouchPhase.Moved && Input.GetTouch(0).deltaPosition.x<10f && Input.GetTouch(0).deltaPosition.y<100f) {
+//			GameObject.Find ("Managers").GetComponent<GameManager> ().selectedstatename = name;
+//		}
+
+	void OnMouseDown(){
+		countah=1;
+	}
+	void OnMouseUp(){
+		Debug.Log ("Tap ends at : " + countah);
+		if (countah <= 8) {
+			GameObject.Find ("Managers").GetComponent<GameManager> ().selectedstatename = name;
+		}
+		countah = 0;
+	}
+	}
+
