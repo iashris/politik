@@ -3,6 +3,17 @@ using System.Collections;
 public class StateManager : MonoBehaviour {
 
 	public string fullname;
+	public int constituencies;
+	public int population;
+	public int gdp;
+	public float poverty;
+	public float hindus;
+	public float muslims;
+	public float christians;
+	public float urbanization;
+	public float literacy;
+
+
 	int timespressed=0;
 	int currzoom;
 	float zooma;
@@ -85,7 +96,7 @@ public class StateManager : MonoBehaviour {
 	}
 	void OnMouseUp(){
 		Debug.Log ("Tap ends at : " + countah);
-		if (countah <= 15) {
+		if (countah <= 5) {
 			GameObject.Find ("Managers").GetComponent<GameManager> ().selectedstatename = name;
 		}
 		countah = 0;

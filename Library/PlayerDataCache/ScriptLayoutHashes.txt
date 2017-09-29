@@ -141,3 +141,4 @@ c2275a8bfbb9f9942cad75ecdfded41d UnityEngine.HoloLens.dll:UnityEngine.VR.WSA.Spa
 45f3431f0103c41611e8d4eec3d439df UnityEngine.HoloLens.dll:UnityEngine.VR.WSA.SpatialMappingRenderer
 e4c52cf00c3f33bdbe560eb4e3371233 Assembly-CSharp.dll:cakeslice.Toggle
 f0e3bacc3eeab206aaacfeb7af7135f1 Assembly-CSharp.dll:.CameraManager
+05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.Pinch

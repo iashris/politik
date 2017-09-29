@@ -61,6 +61,7 @@
      <Compile Include="Assets\Scripts\CameraManager.cs" />
      <Compile Include="Assets\Scripts\GameManager.cs" />
      <Compile Include="Assets\Scripts\Pan.cs" />
+     <Compile Include="Assets\Scripts\Pinch.cs" />
      <Compile Include="Assets\Scripts\PinchZoom.cs" />
      <Compile Include="Assets\Scripts\PlaneManager.cs" />
      <Compile Include="Assets\Scripts\StateManager.cs" />

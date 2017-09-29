@@ -14,7 +14,7 @@ public class PlaneManager : MonoBehaviour {
 		
 	}
 	void OnMouseDown(){
-		if (Input.GetTouch (0).tapCount == 1 && Input.GetTouch (0).phase == TouchPhase.Began) {
+		if (Input.touchCount>0 && Input.GetTouch (0).tapCount == 1 && Input.GetTouch (0).phase == TouchPhase.Began) {
 			GameObject.Find ("Managers").GetComponent<GameManager> ().selectedstatename = "";
 		}
 	}
