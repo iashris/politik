@@ -104,6 +104,7 @@
 'Assets/OutlineEffect/LinkedSet.cs'
 'Assets/OutlineEffect/Outline.cs'
 'Assets/OutlineEffect/OutlineEffect.cs'
+'Assets/SceneMgr.cs'
 'Assets/Scripts/CameraManager.cs'
 'Assets/Scripts/GameManager.cs'
 'Assets/Scripts/Pan.cs'

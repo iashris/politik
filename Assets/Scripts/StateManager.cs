@@ -12,6 +12,8 @@ public class StateManager : MonoBehaviour {
 	public float christians;
 	public float urbanization;
 	public float literacy;
+	public string[] neighbors;
+	public float turnout;
 
 
 	int timespressed=0;
